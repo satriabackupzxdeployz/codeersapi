@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="id" data-page="home">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Coders API — Multi-Role REST Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-logo">CODERS<span>API</span></div>
+  <div class="loader-bars">
+    <div class="loader-bar"></div><div class="loader-bar"></div><div class="loader-bar"></div><div class="loader-bar"></div><div class="loader-bar"></div>
+  </div>
+  <div class="loader-pct" id="loader-pct">0%</div>
+</div>
+
+<div class="noise"></div>
+<div class="grid-bg"></div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo" onclick="navigate('home')">
+      <div class="logo-icon">C</div>
+      CODERS<span>API</span>
+    </div>
+    <nav>
+      <button class="nav-btn active" id="nav-home" onclick="navigate('home')">Home</button>
+      <button class="nav-btn" id="nav-docs" onclick="goToDocs()">Docs</button>
+      <button class="nav-btn">Features</button>
+      <button class="nav-btn">Pricing</button>
+      <div class="nav-sep"></div>
+      <button class="nav-cta" onclick="navigate('login')">Login</button>
+    </nav>
+  </div>
+</header>
+
+<div class="page" id="page-home">
+
+  <div class="hero" style="padding-top:120px">
+    <div class="hero-left">
+      <div class="hero-badge"><span class="badge-dot"></span> Platform REST API Multi-Role · v2.0</div>
+      <h1>CODERS<br><span class="accent">API</span></h1>
+      <div class="hero-sub"><div class="sub-line"></div><span>REST API Platform</span><span>·</span><span>Built by Coders</span></div>
+      <p class="hero-desc">Platform API multi-role berbasis AI dengan ratusan endpoint siap pakai. Sistem API Key otomatis, rate limiting cerdas per role, anti-spam multi-layer, dan monitoring realtime via Telegram bot.</p>
+      <div class="hero-ctas">
+        <button class="btn-primary" onclick="goToDocs()">⟶ Lihat Dokumentasi</button>
+        <button class="btn-outline" onclick="navigate('login')">⌘ Dapatkan API Key</button>
+      </div>
+      <div class="stats-grid reveal">
+        <div class="stat"><div class="stat-val" id="stat-ep">38+</div><div class="stat-lbl">Endpoints</div></div>
+        <div class="stat"><div class="stat-val" id="stat-usr">—</div><div class="stat-lbl">Users</div></div>
+        <div class="stat"><div class="stat-val" id="stat-req">1.2M+</div><div class="stat-lbl">Requests</div></div>
+        <div class="stat"><div class="stat-val">&lt;120ms</div><div class="stat-lbl">Latency</div></div>
+      </div>
+      <div class="scroll-hint" onclick="document.getElementById('features-section').scrollIntoView({behavior:'smooth'})">
+        <span>Scroll untuk melihat fitur</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="terminal">
+        <div class="term-bar">
+          <div class="tdot tdot-r"></div><div class="tdot tdot-y"></div><div class="tdot tdot-g"></div>
+          <span class="term-title">bash — coders-api</span>
+        </div>
+        <div class="term-body" id="terminal-body">
+          <div><span class="t-prompt">➜ </span><span id="term-cmd"></span><span class="t-caret" id="term-caret"></span></div>
+          <div id="term-out" style="margin-top:10px;display:none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="ticker-dot">·</span>AI Chatbot</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Media Downloader</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Anime Scraper</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Image Creator</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>YouTube Search</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>TikTok Search</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Rate Limiting</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Telegram Monitor</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Role-Based Access</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Anti-Spam</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>AI Chatbot</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Media Downloader</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Anime Scraper</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Image Creator</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>YouTube Search</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>TikTok Search</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Rate Limiting</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Telegram Monitor</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Role-Based Access</span>
+      <span class="ticker-item"><span class="ticker-dot">·</span>Anti-Spam</span>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <section id="features-section">
+    <div class="section-inner">
+      <p class="eyebrow reveal">Fitur Unggulan</p>
+      <h2 class="section-title reveal">Kenapa Pilih <span>Coders?</span></h2>
+      <div class="features-grid">
+        <div class="feature reveal" style="transition-delay:.0s">
+          <div class="feature-num">01</div>
+          <div class="feature-icon">🔑</div>
+          <div class="feature-name">API Key System</div>
+          <div class="feature-desc">Setiap user mendapat API Key unik. Kelola, regenerasi, dan pantau usage kapan saja dari dashboard personal.</div>
+        </div>
+        <div class="feature reveal" style="transition-delay:.06s">
+          <div class="feature-num">02</div>
+          <div class="feature-icon">🛡️</div>
+          <div class="feature-name">Rate Limiting</div>
+          <div class="feature-desc">Sistem rate limit cerdas berbasis role. Free, Basic, Pro, dan VIP punya kuota yang adil dan transparan.</div>
+        </div>
+        <div class="feature reveal" style="transition-delay:.12s">
+          <div class="feature-num">03</div>
+          <div class="feature-icon">🤖</div>
+          <div class="feature-name">AI Powered</div>
+          <div class="feature-desc">Endpoint AI terintegrasi — chatbot multi-model, image generation, text analysis, dan search cerdas.</div>
+        </div>
+        <div class="feature reveal" style="transition-delay:.18s">
+          <div class="feature-num">04</div>
+          <div class="feature-icon">📡</div>
+          <div class="feature-name">Telegram Monitor</div>
+          <div class="feature-desc">Admin bot Telegram untuk monitoring live — request per menit, user baru, error alert, semua real-time.</div>
+        </div>
+        <div class="feature reveal" style="transition-delay:.24s">
+          <div class="feature-num">05</div>
+          <div class="feature-icon">⚡</div>
+          <div class="feature-name">Multi-Endpoint</div>
+          <div class="feature-desc">38+ endpoint aktif: anime scraper, downloader, AI generator, search engine, random image, dan terus bertambah.</div>
+        </div>
+        <div class="feature reveal" style="transition-delay:.30s">
+          <div class="feature-num">06</div>
+          <div class="feature-icon">📖</div>
+          <div class="feature-name">Docs Interaktif</div>
+          <div class="feature-desc">Dokumentasi lengkap dengan contoh request/response, parameter detail, dan endpoint explorer langsung di browser.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <section>
+    <div class="section-inner">
+      <p class="eyebrow reveal">Integrasi Mudah</p>
+      <h2 class="section-title reveal">Langsung <span>Digunakan</span></h2>
+      <div class="code-section">
+        <div class="code-info reveal">
+          <p>Cukup satu request HTTP dengan header <code>x-api-key</code> kamu — tanpa setup rumit, tanpa OAuth berlapis.</p>
+          <p>Semua response dalam format JSON konsisten. Error code terstandarisasi, mudah di-handle di semua bahasa pemrograman.</p>
+          <button class="btn-outline" style="margin-top:8px" onclick="goToDocs()">⟶ Buka Dokumentasi</button>
+        </div>
+        <div class="codeblock reveal" style="transition-delay:.1s">
+          <div class="cb-header">
+            <div class="cb-dots"><div class="cb-dot"></div><div class="cb-dot"></div><div class="cb-dot"></div></div>
+            <span class="cb-lang">JavaScript · Fetch API</span>
+          </div>
+          <div class="cb-body">
+<span style="color:var(--fg3)">// Request ke Coders API</span>
+<span style="color:var(--violet)">const</span> <span style="color:var(--fg)">res</span> = <span style="color:var(--violet)">await</span> fetch(
+  <span style="color:var(--cyan)">"https://api.codersid.biz.id/ai/chatbot"</span>
+    + <span style="color:var(--cyan)">"?prompt=halo&model=chatgpt4"</span>,
+  {
+    <span style="color:var(--blue)">headers</span>: {
+      <span style="color:var(--cyan)">"x-api-key"</span>: <span style="color:var(--cyan)">"YOUR_API_KEY"</span>
+    }
+  }
+);
+
+<span style="color:var(--violet)">const</span> <span style="color:var(--fg)">data</span> = <span style="color:var(--violet)">await</span> res.json();
+<span style="color:var(--fg3)">// → { status: true, model: "chatgpt4", response: "..." }</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <section id="pricing">
+    <div class="section-inner">
+      <p class="eyebrow reveal">Paket & Harga</p>
+      <h2 class="section-title reveal">Pilih <span>Paket Kamu</span></h2>
+      <div class="pricing-grid">
+        <div class="plan reveal">
+          <div class="plan-badge">Free</div>
+          <div class="plan-name">Starter</div>
+          <div class="plan-price">Rp0 <span>/ bulan</span></div>
+          <div class="plan-desc">Cukup untuk eksplorasi dan testing endpoint dasar.</div>
+          <hr class="plan-divider"/>
+          <ul class="plan-list">
+            <li><span class="icon">✓</span> API Key otomatis</li>
+            <li><span class="icon">✓</span> 100 req / hari</li>
+            <li><span class="icon">✓</span> Akses endpoint publik</li>
+            <li class="off"><span class="icon">✕</span> Endpoint premium</li>
+            <li class="off"><span class="icon">✕</span> Priority support</li>
+          </ul>
+          <button class="plan-btn plan-btn-outline" onclick="navigate('login')">Mulai Gratis</button>
+        </div>
+        <div class="plan featured reveal" style="transition-delay:.06s">
+          <div class="plan-badge">Populer</div>
+          <div class="plan-name">Pro</div>
+          <div class="plan-price">Rp25k <span>/ bulan</span></div>
+          <div class="plan-desc">Untuk developer aktif yang butuh kuota besar dan akses penuh.</div>
+          <hr class="plan-divider"/>
+          <ul class="plan-list">
+            <li><span class="icon">✓</span> API Key otomatis</li>
+            <li><span class="icon">✓</span> 5.000 req / hari</li>
+            <li><span class="icon">✓</span> Semua endpoint aktif</li>
+            <li><span class="icon">✓</span> Endpoint AI & canvas</li>
+            <li><span class="icon">✓</span> Priority support</li>
+          </ul>
+          <button class="plan-btn plan-btn-solid" onclick="navigate('login')">Pilih Pro</button>
+        </div>
+        <div class="plan reveal" style="transition-delay:.12s">
+          <div class="plan-badge">VIP</div>
+          <div class="plan-name">Enterprise</div>
+          <div class="plan-price">Custom <span>/ bulan</span></div>
+          <div class="plan-desc">Tim atau bisnis yang butuh kuota tak terbatas dan SLA khusus.</div>
+          <hr class="plan-divider"/>
+          <ul class="plan-list">
+            <li><span class="icon">✓</span> Unlimited requests</li>
+            <li><span class="icon">✓</span> Dedicated endpoint</li>
+            <li><span class="icon">✓</span> Custom rate limit</li>
+            <li><span class="icon">✓</span> SLA & monitoring</li>
+            <li><span class="icon">✓</span> Direct dev contact</li>
+          </ul>
+          <button class="plan-btn plan-btn-outline">Hubungi Kami</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <section>
+    <div class="section-inner">
+      <p class="eyebrow reveal">FAQ</p>
+      <h2 class="section-title reveal">Pertanyaan <span>Umum</span></h2>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <div class="faq-q" onclick="toggleFaq(this)">Bagaimana cara mendapatkan API Key? <i class="faq-icon">+</i></div>
+          <div class="faq-a"><div class="faq-ai">Daftar akun gratis di halaman Register, lalu API Key kamu akan langsung digenerate otomatis. Tidak perlu verifikasi panjang — langsung bisa dipakai.</div></div>
+        </div>
+        <div class="faq-item reveal" style="transition-delay:.04s">
+          <div class="faq-q" onclick="toggleFaq(this)">Apa yang terjadi jika rate limit terlampaui? <i class="faq-icon">+</i></div>
+          <div class="faq-a"><div class="faq-ai">Request akan diblokir sementara dengan response <code>429 Too Many Requests</code>. Rate limit akan reset otomatis setiap hari pukul 00.00 WIB.</div></div>
+        </div>
+        <div class="faq-item reveal" style="transition-delay:.08s">
+          <div class="faq-q" onclick="toggleFaq(this)">Apakah data saya aman? <i class="faq-icon">+</i></div>
+          <div class="faq-a"><div class="faq-ai">Kami tidak menyimpan konten request kamu. Hanya log request count untuk keperluan rate limiting.</div></div>
+        </div>
+        <div class="faq-item reveal" style="transition-delay:.12s">
+          <div class="faq-q" onclick="toggleFaq(this)">Endpoint apa saja yang tersedia? <i class="faq-icon">+</i></div>
+          <div class="faq-a"><div class="faq-ai">Tersedia 38+ endpoint aktif meliputi: AI chatbot (GPT-4, DeepSeek, MetaAI), image generation, anime/manga scraper, YouTube & TikTok search, random image, dan banyak lagi. Cek dokumentasi untuk daftar lengkap.</div></div>
+        </div>
+      </div>
+      <div class="cta-banner reveal">
+        <div>
+          <h3>Siap Mulai Sekarang?</h3>
+          <p>Daftar gratis, dapatkan API Key dalam hitungan detik.</p>
+        </div>
+        <button class="btn-primary" style="flex-shrink:0" onclick="navigate('login')">⟶ Register Gratis</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-copy">© <span id="yr"></span> Coders API — Built by Coders</span>
+      <div class="footer-links">
+        <a>Privacy</a><a>Terms</a>
+        <a onclick="goToDocs()">Docs</a>
+        <a>Portfolio</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<div class="page" id="page-docs">
+  <div class="docs-layout">
+    <aside class="docs-sidebar">
+      <div class="sidebar-section">
+        <span class="sidebar-label">Overview</span>
+        <button class="sidebar-link active" onclick="scrollTo('docs-top')">Introduction</button>
+        <button class="sidebar-link" onclick="scrollTo('docs-auth')">Authentication</button>
+      </div>
+      <div class="sidebar-section">
+        <span class="sidebar-label">AI</span>
+        <button class="sidebar-link" onclick="scrollTo('group-ai')"><span class="method m-get">GET</span>/ai/chatbot</button>
+        <button class="sidebar-link" onclick="scrollTo('group-ai')"><span class="method m-get">GET</span>/ai/hydromind</button>
+        <button class="sidebar-link" onclick="scrollTo('group-ai')"><span class="method m-get">GET</span>/ai/remakerai</button>
+        <button class="sidebar-link" onclick="scrollTo('group-ai')"><span class="method m-get">GET</span>/ai/kivotos</button>
+        <button class="sidebar-link" onclick="scrollTo('group-ai')"><span class="method m-get">GET</span>/ai/deepimg</button>
+      </div>
+      <div class="sidebar-section">
+        <span class="sidebar-label">Search</span>
+        <button class="sidebar-link" onclick="scrollTo('group-search')"><span class="method m-get">GET</span>/search/youtube</button>
+        <button class="sidebar-link" onclick="scrollTo('group-search')"><span class="method m-get">GET</span>/search/tiktok</button>
+        <button class="sidebar-link" onclick="scrollTo('group-search')"><span class="method m-get">GET</span>/search/gimage</button>
+        <button class="sidebar-link" onclick="scrollTo('group-search')"><span class="method m-get">GET</span>/search/playstore</button>
+        <button class="sidebar-link" onclick="scrollTo('group-search')"><span class="method m-get">GET</span>/search/npm</button>
+        <button class="sidebar-link" onclick="scrollTo('group-search')"><span class="method m-get">GET</span>/search/fdroid</button>
+        <button class="sidebar-link" onclick="scrollTo('group-search')"><span class="method m-get">GET</span>/search/sfile</button>
+        <button class="sidebar-link" onclick="scrollTo('group-search')"><span class="method m-get">GET</span>/search/happymod</button>
+      </div>
+      <div class="sidebar-section">
+        <span class="sidebar-label">Anime</span>
+        <button class="sidebar-link" onclick="scrollTo('group-anime')"><span class="method m-get">GET</span>/anime/alqanime/*</button>
+        <button class="sidebar-link" onclick="scrollTo('group-anime')"><span class="method m-get">GET</span>/anime/doujin/*</button>
+        <button class="sidebar-link" onclick="scrollTo('group-anime')"><span class="method m-get">GET</span>/anime/kompi/*</button>
+        <button class="sidebar-link" onclick="scrollTo('group-anime')"><span class="method m-get">GET</span>/anime/jadwalrilis</button>
+      </div>
+      <div class="sidebar-section">
+        <span class="sidebar-label">Random</span>
+        <button class="sidebar-link" onclick="scrollTo('group-random')"><span class="method m-get">GET</span>/random/waifu</button>
+        <button class="sidebar-link" onclick="scrollTo('group-random')"><span class="method m-get">GET</span>/random/ba</button>
+        <button class="sidebar-link" onclick="scrollTo('group-random')"><span class="method m-get">GET</span>/random/papayang</button>
+      </div>
+      <div class="sidebar-section">
+        <span class="sidebar-label">Image Creator</span>
+        <button class="sidebar-link" onclick="scrollTo('group-img')"><span class="method m-get">GET</span>/imagecreator/pustaz</button>
+      </div>
+    </aside>
+
+    <main class="docs-main" id="docs-top">
+      <div class="docs-hero">
+        <div class="hero-badge" style="margin-bottom:16px"><span class="badge-dot"></span> API Reference v2.0</div>
+        <h1>Coders API</h1>
+        <p>Platform REST API multi-role dengan 38+ endpoint aktif. Semua response dalam format JSON yang konsisten. Gunakan API Key kamu pada setiap request.</p>
+        <div class="base-url-box">
+          <code id="base-url">https://api.codersid.biz.id</code>
+          <button class="copy-btn" onclick="copyBaseUrl()">Copy</button>
+        </div>
+      </div>
+
+      <div class="endpoint-group" id="docs-auth">
+        <div class="group-title"><span class="group-icon">🔐</span> Authentication</div>
+        <div class="codeblock" style="margin-bottom:16px">
+          <div class="cb-header"><div class="cb-dots"><div class="cb-dot"></div><div class="cb-dot"></div><div class="cb-dot"></div></div><span class="cb-lang">Header</span></div>
+          <div class="cb-body"><span style="color:var(--blue)">x-api-key</span>: <span style="color:var(--cyan)">YOUR_API_KEY_HERE</span></div>
+        </div>
+        <p style="font-size:13px;color:var(--fg2);line-height:1.8">Semua endpoint memerlukan API Key yang dikirim via header <code>x-api-key</code>. Dapatkan key kamu dengan mendaftar di halaman <span style="color:var(--cyan);cursor:pointer" onclick="navigate('login')">Register</span>.</p>
+      </div>
+
+      <div class="endpoint-group" id="group-ai">
+        <div class="group-title"><span class="group-icon">🤖</span> AI Endpoints</div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/ai/chatbot</span>
+            <span class="ep-desc">Multi-model AI Chatbot</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p class="ep-section-title">Parameters</p>
+            <table class="params-table"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>Description</th></tr></thead><tbody>
+              <tr><td class="param-name">prompt</td><td><span class="param-type">string</span></td><td><span class="param-req">required</span></td><td>Teks input ke AI</td></tr>
+              <tr><td class="param-name">model</td><td><span class="param-type">string</span></td><td><span class="param-req">required</span></td><td>chatgpt4 | deepseek | metaai</td></tr>
+            </tbody></table>
+            <p class="ep-section-title">Example Request</p>
+            <div class="ep-example"><pre>GET /ai/chatbot?prompt=halo&amp;model=chatgpt4
+x-api-key: YOUR_KEY</pre></div>
+            <p class="ep-section-title">Example Response</p>
+            <div class="ep-example"><pre><span style="color:var(--fg3)">{</span>
+  <span style="color:var(--blue)">"status"</span>: <span style="color:var(--amber)">true</span>,
+  <span style="color:var(--blue)">"model"</span>: <span style="color:var(--cyan)">"chatgpt4"</span>,
+  <span style="color:var(--blue)">"response"</span>: <span style="color:var(--cyan)">"Halo! Ada yang bisa saya bantu?"</span>
+<span style="color:var(--fg3)">}</span></pre></div>
+          </div></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/ai/hydromind</span>
+            <span class="ep-desc">HydroMind AI Chat</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p class="ep-section-title">Parameters</p>
+            <table class="params-table"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>Description</th></tr></thead><tbody>
+              <tr><td class="param-name">prompt</td><td><span class="param-type">string</span></td><td><span class="param-req">required</span></td><td>Pertanyaan atau perintah ke AI</td></tr>
+            </tbody></table>
+            <p class="ep-section-title">Example Response</p>
+            <div class="ep-example"><pre><span style="color:var(--fg3)">{</span>
+  <span style="color:var(--blue)">"status"</span>: <span style="color:var(--amber)">true</span>,
+  <span style="color:var(--blue)">"result"</span>: <span style="color:var(--cyan)">"Response dari HydroMind..."</span>
+<span style="color:var(--fg3)">}</span></pre></div>
+          </div></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/ai/deepimg</span>
+            <span class="ep-desc">AI Image Generation</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p class="ep-section-title">Parameters</p>
+            <table class="params-table"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>Description</th></tr></thead><tbody>
+              <tr><td class="param-name">prompt</td><td><span class="param-type">string</span></td><td><span class="param-req">required</span></td><td>Deskripsi gambar yang ingin dibuat</td></tr>
+              <tr><td class="param-name">style</td><td><span class="param-type">string</span></td><td><span class="param-opt">optional</span></td><td>Gaya gambar (anime, realistic, dll)</td></tr>
+            </tbody></table>
+            <p class="ep-section-title">Example Response</p>
+            <div class="ep-example"><pre><span style="color:var(--fg3)">{</span>
+  <span style="color:var(--blue)">"status"</span>: <span style="color:var(--amber)">true</span>,
+  <span style="color:var(--blue)">"imageUrl"</span>: <span style="color:var(--cyan)">"https://cdn.codersid.biz.id/img/..."</span>
+<span style="color:var(--fg3)">}</span></pre></div>
+          </div></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/ai/remakerai</span>
+            <span class="ep-desc">RemakeR AI</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p class="ep-section-title">Parameters</p>
+            <table class="params-table"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>Description</th></tr></thead><tbody>
+              <tr><td class="param-name">prompt</td><td><span class="param-type">string</span></td><td><span class="param-req">required</span></td><td>Input teks</td></tr>
+            </tbody></table>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="endpoint-group" id="group-search">
+        <div class="group-title"><span class="group-icon">🔍</span> Search Endpoints</div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/search/youtube</span>
+            <span class="ep-desc">YouTube Video Search</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p class="ep-section-title">Parameters</p>
+            <table class="params-table"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>Description</th></tr></thead><tbody>
+              <tr><td class="param-name">q</td><td><span class="param-type">string</span></td><td><span class="param-req">required</span></td><td>Query pencarian YouTube</td></tr>
+            </tbody></table>
+            <p class="ep-section-title">Example Response</p>
+            <div class="ep-example"><pre><span style="color:var(--fg3)">{</span>
+  <span style="color:var(--blue)">"status"</span>: <span style="color:var(--amber)">true</span>,
+  <span style="color:var(--blue)">"result"</span>: [
+    {
+      <span style="color:var(--blue)">"title"</span>: <span style="color:var(--cyan)">"Video Title"</span>,
+      <span style="color:var(--blue)">"channel"</span>: <span style="color:var(--cyan)">"Channel Name"</span>,
+      <span style="color:var(--blue)">"duration"</span>: <span style="color:var(--cyan)">"5:24"</span>,
+      <span style="color:var(--blue)">"link"</span>: <span style="color:var(--cyan)">"https://youtube.com/watch?v=..."</span>
+    }
+  ]
+<span style="color:var(--fg3)">}</span></pre></div>
+          </div></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/search/tiktok</span>
+            <span class="ep-desc">TikTok Video Search</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p class="ep-section-title">Parameters</p>
+            <table class="params-table"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>Description</th></tr></thead><tbody>
+              <tr><td class="param-name">q</td><td><span class="param-type">string</span></td><td><span class="param-req">required</span></td><td>Query pencarian TikTok</td></tr>
+            </tbody></table>
+          </div></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/search/gimage</span>
+            <span class="ep-desc">Google Image Search</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p class="ep-section-title">Parameters</p>
+            <table class="params-table"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>Description</th></tr></thead><tbody>
+              <tr><td class="param-name">q</td><td><span class="param-type">string</span></td><td><span class="param-req">required</span></td><td>Query pencarian gambar</td></tr>
+            </tbody></table>
+          </div></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/search/playstore</span>
+            <span class="ep-desc">Google Play Store Search</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p class="ep-section-title">Parameters</p>
+            <table class="params-table"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>Description</th></tr></thead><tbody>
+              <tr><td class="param-name">q</td><td><span class="param-type">string</span></td><td><span class="param-req">required</span></td><td>Nama aplikasi</td></tr>
+            </tbody></table>
+          </div></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/search/npm</span>
+            <span class="ep-desc">NPM Package Search</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p class="ep-section-title">Parameters</p>
+            <table class="params-table"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>Description</th></tr></thead><tbody>
+              <tr><td class="param-name">q</td><td><span class="param-type">string</span></td><td><span class="param-req">required</span></td><td>Nama package NPM</td></tr>
+            </tbody></table>
+          </div></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/search/happymod</span>
+            <span class="ep-desc">HappyMod APK Search</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p class="ep-section-title">Parameters</p>
+            <table class="params-table"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>Description</th></tr></thead><tbody>
+              <tr><td class="param-name">q</td><td><span class="param-type">string</span></td><td><span class="param-req">required</span></td><td>Nama game/aplikasi</td></tr>
+            </tbody></table>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="endpoint-group" id="group-anime">
+        <div class="group-title"><span class="group-icon">🎌</span> Anime Endpoints</div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/anime/alqanime/search</span>
+            <span class="ep-desc">Cari anime</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p class="ep-section-title">Parameters</p>
+            <table class="params-table"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>Description</th></tr></thead><tbody>
+              <tr><td class="param-name">q</td><td><span class="param-type">string</span></td><td><span class="param-req">required</span></td><td>Judul anime</td></tr>
+            </tbody></table>
+          </div></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/anime/alqanime/ongoing</span>
+            <span class="ep-desc">Daftar anime ongoing</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p style="font-size:12px;color:var(--fg2);padding:12px 0">Tidak memerlukan parameter. Mengembalikan daftar anime yang sedang tayang.</p>
+          </div></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/anime/alqanime/detail</span>
+            <span class="ep-desc">Detail anime by slug</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p class="ep-section-title">Parameters</p>
+            <table class="params-table"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>Description</th></tr></thead><tbody>
+              <tr><td class="param-name">slug</td><td><span class="param-type">string</span></td><td><span class="param-req">required</span></td><td>Slug anime (dari hasil search)</td></tr>
+            </tbody></table>
+          </div></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/anime/jadwalrilis</span>
+            <span class="ep-desc">Jadwal rilis anime mingguan</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p style="font-size:12px;color:var(--fg2);padding:12px 0">Mengembalikan jadwal rilis episode anime per hari dalam seminggu.</p>
+          </div></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/anime/kompi/search</span>
+            <span class="ep-desc">Kompi anime search</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p class="ep-section-title">Parameters</p>
+            <table class="params-table"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>Description</th></tr></thead><tbody>
+              <tr><td class="param-name">q</td><td><span class="param-type">string</span></td><td><span class="param-req">required</span></td><td>Judul anime</td></tr>
+            </tbody></table>
+          </div></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/anime/doujin/search</span>
+            <span class="ep-desc">Doujin / Manga search</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p class="ep-section-title">Parameters</p>
+            <table class="params-table"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>Description</th></tr></thead><tbody>
+              <tr><td class="param-name">q</td><td><span class="param-type">string</span></td><td><span class="param-req">required</span></td><td>Judul doujin/manga</td></tr>
+            </tbody></table>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="endpoint-group" id="group-random">
+        <div class="group-title"><span class="group-icon">🎲</span> Random Endpoints</div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/random/waifu</span>
+            <span class="ep-desc">Random waifu image</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p class="ep-section-title">Example Response</p>
+            <div class="ep-example"><pre><span style="color:var(--fg3)">{</span>
+  <span style="color:var(--blue)">"status"</span>: <span style="color:var(--amber)">true</span>,
+  <span style="color:var(--blue)">"imageUrl"</span>: <span style="color:var(--cyan)">"https://..."</span>
+<span style="color:var(--fg3)">}</span></pre></div>
+          </div></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/random/ba</span>
+            <span class="ep-desc">Random Blue Archive image</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p style="font-size:12px;color:var(--fg2);padding:12px 0">Mengembalikan URL gambar acak dari koleksi Blue Archive.</p>
+          </div></div>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/random/papayang</span>
+            <span class="ep-desc">Random Papayang image</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p style="font-size:12px;color:var(--fg2);padding:12px 0">Mengembalikan URL gambar acak dari koleksi Papayang.</p>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="endpoint-group" id="group-img">
+        <div class="group-title"><span class="group-icon">🎨</span> Image Creator</div>
+
+        <div class="endpoint-card">
+          <div class="ep-header" onclick="toggleEp(this)">
+            <span class="ep-method m-get">GET</span>
+            <span class="ep-path">/imagecreator/pustaz</span>
+            <span class="ep-desc">Buat gambar custom via Pustaz</span>
+            <i class="ep-chevron">▾</i>
+          </div>
+          <div class="ep-body"><div class="ep-inner">
+            <p class="ep-section-title">Parameters</p>
+            <table class="params-table"><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>Description</th></tr></thead><tbody>
+              <tr><td class="param-name">text</td><td><span class="param-type">string</span></td><td><span class="param-req">required</span></td><td>Teks yang akan ditampilkan</td></tr>
+              <tr><td class="param-name">bg</td><td><span class="param-type">string</span></td><td><span class="param-opt">optional</span></td><td>Warna background (hex)</td></tr>
+            </tbody></table>
+            <p class="ep-section-title">Example Response</p>
+            <div class="ep-example"><pre><span style="color:var(--fg3)">{</span>
+  <span style="color:var(--blue)">"status"</span>: <span style="color:var(--amber)">true</span>,
+  <span style="color:var(--blue)">"imageUrl"</span>: <span style="color:var(--cyan)">"https://cdn.codersid.biz.id/canvas/..."</span>
+<span style="color:var(--fg3)">}</span></pre></div>
+          </div></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div class="page" id="page-login">
+  <div class="login-wrap">
+    <div class="login-logo">
+      <h2>CODERS<span>API</span></h2>
+      <div class="login-sub">$ ./auth --user</div>
+    </div>
+    <div class="login-card">
+      <div class="login-tabs">
+        <button class="login-tab active" id="tab-login" onclick="switchTab('login')">⟶ Login</button>
+        <button class="login-tab" id="tab-reg" onclick="switchTab('reg')">＋ Register</button>
+      </div>
+      <div class="login-body">
+
+        <div class="log-form show" id="log-form">
+          <button class="oauth-btn" onclick="showOAuthMsg('Google')">
+            <svg class="oauth-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            Lanjutkan dengan Google
+          </button>
+          <button class="oauth-btn" onclick="showOAuthMsg('GitHub')">
+            <svg class="oauth-icon" viewBox="0 0 24 24" fill="var(--fg)"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            Lanjutkan dengan GitHub
+          </button>
+          <div class="divider-or">atau masuk dengan email</div>
+          <div class="field">
+            <label>Email / Username</label>
+            <div class="field-icon-wrap">
+              <span class="field-icon">✉</span>
+              <input type="text" id="login-email" placeholder="admin atau nama@email.com"/>
+            </div>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <div class="field-icon-wrap">
+              <span class="field-icon">🔒</span>
+              <input type="password" id="login-pass" placeholder="••••••••"/>
+            </div>
+          </div>
+          <div class="form-footer">
+            <button class="form-link">Lupa Password?</button>
+          </div>
+          <button class="submit-btn" onclick="handleLogin()">⟶ Masuk</button>
+          <div id="login-error" style="display:none;margin-top:12px;padding:10px 14px;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.25);border-radius:5px;font-family:var(--ff-mono);font-size:11px;color:var(--red);">Email/username atau password salah.</div>
+          <div class="login-footer-note">Dengan masuk, kamu menyetujui <a>Syarat & Ketentuan</a> dan <a>Kebijakan Privasi</a> kami.</div>
+        </div>
+
+        <div class="reg-form" id="reg-form">
+          <button class="oauth-btn" onclick="showOAuthMsg('Google')">
+            <svg class="oauth-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            Daftar dengan Google
+          </button>
+          <button class="oauth-btn" onclick="showOAuthMsg('GitHub')">
+            <svg class="oauth-icon" viewBox="0 0 24 24" fill="var(--fg)"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            Daftar dengan GitHub
+          </button>
+          <div class="divider-or">atau daftar dengan email</div>
+          <div class="field">
+            <label>Username</label>
+            <div class="field-icon-wrap">
+              <span class="field-icon">@</span>
+              <input type="text" id="reg-username" placeholder="username_kamu"/>
+            </div>
+          </div>
+          <div class="field">
+            <label>Email (Gmail)</label>
+            <div class="field-icon-wrap">
+              <span class="field-icon">✉</span>
+              <input type="email" id="reg-email" placeholder="nama@gmail.com"/>
+            </div>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <div class="field-icon-wrap">
+              <span class="field-icon">🔒</span>
+              <input type="password" id="reg-pass" placeholder="Min. 8 karakter"/>
+            </div>
+          </div>
+          <div class="field">
+            <label>Konfirmasi Password</label>
+            <div class="field-icon-wrap">
+              <span class="field-icon">🔒</span>
+              <input type="password" id="reg-pass2" placeholder="Ulangi password"/>
+            </div>
+          </div>
+          <button class="submit-btn" style="margin-top:4px" onclick="handleRegister()">＋ Buat Akun</button>
+          <div id="reg-error" style="display:none;margin-top:12px;padding:10px 14px;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.25);border-radius:5px;font-family:var(--ff-mono);font-size:11px;color:var(--red);"></div>
+
+          <div class="success-box" id="reg-success">
+            <div class="success-title">✓ Login berhasil</div>
+            <div class="success-msg">Akun kamu berhasil dibuat dan kamu sudah login. Klik tombol di bawah untuk membuka halaman profil kamu.</div>
+            <a href="/profile" class="go-profile-btn">⟶ Go Profile</a>
+          </div>
+
+          <div class="login-footer-note">Dengan mendaftar, kamu menyetujui <a>Syarat & Ketentuan</a> dan <a>Kebijakan Privasi</a> kami. Hanya akun Gmail yang diizinkan.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast-root"></div>
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script src="/app.js"></script>
+</body>
+</html>
