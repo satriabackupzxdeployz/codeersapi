@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse through our collection of code snippets, scripts, and tools.">
+    <meta name="theme-color" content="#ffffff">
+    <title>Coders API.</title>
+    <link rel="icon" href="/assets/icon.png" type="image/jpeg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/style.css">
+</head>
+<body class="bg-white text-gray-800 antialiased min-h-screen">
+<main class="max-w-2xl mx-auto px-5 py-8 pb-16">
+
+    <!-- Nav -->
+    <div class="nav-bar" data-aos="fade-down" data-aos-duration="800">
+        <a href="/" class="font-bold text-gray-800 text-xl tracking-tight">Coders API</a>
+        <a href="/profile" class="text-sm font-medium text-gray-500 hover:text-gray-800 transition-colors border border-gray-200 rounded-lg px-4 py-1.5 hover:border-gray-400">Profile</a>
+    </div>
+
+    <!-- Header -->
+    <div class="mb-8" data-aos="fade-up" data-aos-duration="900">
+        <div class="flex items-center gap-3 mb-3">
+            <img src="/assets/icon.png" class="w-9 h-9 rounded-lg object-cover">
+            <h1 class="text-2xl font-bold text-gray-800">Coders API</h1>
+        </div>
+        <p class="text-gray-500 text-sm leading-relaxed mb-3">
+            Selamat datang di dokumentasi Coders API. Antarmuka interaktif ini memungkinkan Anda menjelajahi dan menguji koleksi lengkap titik akhir API kami secara real-time.
+        </p>
+        <a href="https://t.me/CodersDev" target="_blank" class="text-xs text-gray-400 hover:text-gray-700 underline transition-colors">Contact Coders.</a>
+    </div>
+
+    <!-- Notifications -->
+    <div class="mb-8" data-aos="fade-up" data-aos-duration="900" data-aos-delay="100">
+        <div class="flex items-center justify-between mb-3">
+            <h2 class="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                <span class="material-icons text-base text-gray-400">notifications</span>
+                Informasi
+            </h2>
+            <span id="unread-count" class="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full font-medium hidden"></span>
+        </div>
+        <div id="notifications-list" class="space-y-2">
+            <div class="flex justify-center py-4"><div class="loader"></div></div>
+        </div>
+    </div>
+
+    <!-- Search -->
+    <div class="relative mb-6" data-aos="fade-up" data-aos-duration="900" data-aos-delay="150">
+        <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg pointer-events-none">search</span>
+        <input type="text" id="searchInput" placeholder="Search API endpoints..." class="search-input">
+    </div>
+
+    <!-- API List -->
+    <div id="content" data-aos="fade-up" data-aos-duration="900" data-aos-delay="200">
+        <div id="noResults" class="text-center py-16 hidden">
+            <p class="text-sm text-gray-400">No result found.</p>
+        </div>
+        <div id="apiList" class="space-y-3">
+            <div class="flex justify-center py-8"><div class="loader"></div></div>
+        </div>
+    </div>
+
+    <footer class="mt-16 pt-8 border-t border-gray-100 text-center">
+        <p class="text-xs text-gray-400 mb-1">© 2025 Coders</p>
+        <p class="text-xs text-gray-400">inspirasi design dari: <a href="https://api.nekolabs.my.id/" target="_blank" class="underline hover:text-gray-600 transition-colors">api.nekolabs.my.id</a></p>
+    </footer>
+</main>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+
+<script src="/app.js"></script>
+</body>
+</html>
