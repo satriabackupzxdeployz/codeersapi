@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Coders API — Profile dashboard dengan statistik penggunaan, limit harian 40 request, dan manajemen API Key."/>
+  <title>Coders API — Profile</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+
+<link rel="stylesheet" href="/style.css">
+</head>
+<body class="bg-white text-black">
+
+<div id="loader">
+  <div class="loader-ring"></div>
+  <div class="loader-text">Coders API</div>
+</div>
+
+<div class="grid-bg"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-dot"></div>
+      Coders API
+    </a>
+    <nav>
+      <a href="/docs" class="nav-link">Docs</a>
+      <button class="nav-btn-outline" onclick="copyApiKey()">
+        <i class="fas fa-copy" style="font-size:11px"></i> Copy API Key
+      </button>
+      <button class="nav-btn" onclick="fakeLogout()">
+        <i class="fas fa-sign-out-alt" style="font-size:11px"></i> Logout
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="avatar">
+        <img id="avatarPhoto" src="" alt="Foto profil akun" style="display:none;"/>
+        <div class="avatar-fallback" id="avatarFallback">J</div>
+        <button class="avatar-upload" onclick="document.getElementById('avatarInput').click()" aria-label="Upload foto profil">
+          <i class="fas fa-camera" style="font-size:10px"></i>
+        </button>
+      </div>
+      <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="handleAvatarUpload(event)" />
+      <div>
+        <div class="hero-eyebrow" id="heroEyebrow"># free-user — Selamat datang</div>
+        <h1 class="hero-title">PROFIL <span>SAYA</span></h1>
+        <div class="hero-sub" id="heroSub">Memuat data profil...</div>
+      </div>
+    </div>
+
+    <div class="hero-actions">
+      <button class="nav-btn-outline" onclick="copyApiKey()">
+        <i class="fas fa-key" style="font-size:11px"></i> Copy Key
+      </button>
+      <a href="/docs" class="nav-btn-outline">
+        <i class="fas fa-book" style="font-size:11px"></i> Docs
+      </a>
+    </div>
+  </section>
+
+  <!-- TOP STATS -->
+  <section class="surface stats-strip">
+    <div class="stat-cell">
+      <div class="stat-block">
+        <div class="stat-value">40</div>
+        <div class="stat-label">Limit / Day</div>
+        <div class="stat-sub">Free plan tanpa saldo</div>
+      </div>
+    </div>
+
+    <div class="stat-cell">
+      <div class="usage-ring" id="usageRing"><span id="usagePercent">0%</span></div>
+      <div class="stat-block">
+        <div class="stat-value" id="usedToday">0</div>
+        <div class="stat-label">Terpakai Hari Ini</div>
+        <div class="stat-sub" id="remainingText">Sisa 40 request</div>
+      </div>
+    </div>
+
+    <div class="stat-cell">
+      <div class="stat-block">
+        <div class="stat-value" id="totalWeek">0</div>
+        <div class="stat-label">Total Request</div>
+        <div class="stat-sub">Akumulasi 7 hari terakhir</div>
+      </div>
+    </div>
+
+    <div class="stat-cell">
+      <div class="stat-block">
+        <div class="stat-value" id="roleText">FREE</div>
+        <div class="stat-label">Role</div>
+        <div class="stat-sub" id="resetTimeText">Reset besok 00:00</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHART -->
+  <section class="surface panel">
+    <div class="panel-head">
+      <div class="panel-title"><i class="fas fa-chart-line"></i> STATISTIK PENGGUNAAN (7 HARI)</div>
+      <div class="panel-sub" id="chartSub">Update realtime berdasarkan local usage</div>
+    </div>
+
+    <div class="chart-wrap">
+      <canvas id="usageChart" width="1200" height="360"></canvas>
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-chip"><i class="fas fa-bolt"></i> Hari ini <strong id="chipToday">0 request</strong></div>
+      <div class="summary-chip"><i class="fas fa-layer-group"></i> Sisa <strong id="chipRemaining">40 request</strong></div>
+      <div class="summary-chip"><i class="fas fa-clock"></i> Reset dalam <strong id="chipReset">—</strong></div>
+      <div class="summary-chip"><i class="fas fa-chart-bar"></i> Rata-rata <strong id="chipAvg">0 / hari</strong></div>
+    </div>
+  </section>
+
+  <!-- TABS -->
+  <div class="tab-bar surface">
+    <button class="tab-btn active" data-tab="info" onclick="switchTab('info')"><i class="fas fa-id-card"></i> Info Akun</button>
+    <button class="tab-btn" data-tab="limit" onclick="switchTab('limit')"><i class="fas fa-battery-half"></i> Limit Harian</button>
+    <button class="tab-btn" data-tab="logs" onclick="switchTab('logs')"><i class="fas fa-file-waveform"></i> Request Log</button>
+    <button class="tab-btn" data-tab="api" onclick="switchTab('api')"><i class="fas fa-key"></i> API Key</button>
+  </div>
+
+  <!-- TAB: INFO -->
+  <div class="tab-content active" id="tab-info">
+    <section class="surface section-card">
+      <div class="section-head"><i class="fas fa-user"></i> INFO AKUN</div>
+      <div class="info-table">
+        <div class="info-row"><div class="info-key">Username</div><div class="info-val" id="infoUsername">—</div></div>
+        <div class="info-row"><div class="info-key">Email</div><div class="info-val" id="infoEmail">—</div></div>
+        <div class="info-row"><div class="info-key">Role</div><div class="info-val" id="infoRole">FREE</div></div>
+        <div class="info-row"><div class="info-key">Bergabung</div><div class="info-val" id="infoJoined">—</div></div>
+        <div class="info-row"><div class="info-key">Referral Code</div><div class="info-val" id="infoReferral">—</div></div>
+        <div class="info-row"><div class="info-key">OAuth</div><div class="info-val" id="infoOauth">Tidak ada</div></div>
+        <div class="info-row"><div class="info-key">Limit Free</div><div class="info-val">40 request / day</div></div>
+      </div>
+    </section>
+
+    <section class="surface section-card">
+      <div class="section-head"><i class="fas fa-pen"></i> UBAH EMAIL &amp; USERNAME</div>
+      <div class="form-grid">
+        <div class="mini-form">
+          <h4>Ganti Email</h4>
+          <div class="mini-form-note">Perubahan ini bersifat demo lokal dan langsung mengupdate tampilan profil.</div>
+          <div id="emailMsg" class="inline-msg"></div>
+          <form onsubmit="updateEmail(event)">
+            <div class="field">
+              <label>Email Baru</label>
+              <div class="input-wrap">
+                <i class="fas fa-at left"></i>
+                <input type="email" id="newEmail" placeholder="emailbaru@gmail.com" required/>
+              </div>
+            </div>
+            <div class="field">
+              <label>Konfirmasi Password</label>
+              <div class="input-wrap">
+                <i class="fas fa-lock left"></i>
+                <input type="password" id="emailPass" placeholder="Masukkan password" required/>
+                <button class="right" type="button" onclick="togglePass('emailPass', this)"><i class="fas fa-eye"></i></button>
+              </div>
+            </div>
+            <button class="action-btn" type="submit" id="emailBtn">
+              <div class="spin-mini"></div>
+              <span class="btn-label"><i class="fas fa-envelope" style="font-size:11px"></i> Ubah Email</span>
+            </button>
+          </form>
+        </div>
+
+        <div class="mini-form">
+          <h4>Ganti Username</h4>
+          <div class="mini-form-note">3–32 karakter, hanya huruf, angka, dan underscore.</div>
+          <div id="usernameMsg" class="inline-msg"></div>
+          <form onsubmit="updateUsername(event)">
+            <div class="field">
+              <label>Username Baru</label>
+              <div class="input-wrap">
+                <i class="fas fa-user left"></i>
+                <input type="text" id="newUsername" placeholder="username_baru" required/>
+              </div>
+            </div>
+            <div class="field">
+              <label>Konfirmasi Password</label>
+              <div class="input-wrap">
+                <i class="fas fa-lock left"></i>
+                <input type="password" id="userPass" placeholder="Masukkan password" required/>
+                <button class="right" type="button" onclick="togglePass('userPass', this)"><i class="fas fa-eye"></i></button>
+              </div>
+            </div>
+            <button class="action-btn" type="submit" id="usernameBtn">
+              <div class="spin-mini"></div>
+              <span class="btn-label"><i class="fas fa-user-pen" style="font-size:11px"></i> Ubah Username</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- TAB: LIMIT -->
+  <div class="tab-content" id="tab-limit">
+    <section class="surface section-card">
+      <div class="section-head"><i class="fas fa-gauge-high"></i> LIMIT HARIAN</div>
+      <div class="limit-grid">
+        <div class="limit-box">
+          <h4>Ringkasan Limit</h4>
+          <div class="limit-meta">
+            <div class="limit-meta-item"><strong>40</strong><span>Limit / day</span></div>
+            <div class="limit-meta-item"><strong id="limitUsedCard">0</strong><span>Used today</span></div>
+            <div class="limit-meta-item"><strong id="limitRemainCard">40</strong><span>Remaining</span></div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="limitBar"></div>
+          </div>
+          <div class="limit-note" id="limitNote">
+            Role FREE mendapatkan maksimal 40 request per hari. Jika hari ini sisa 10 request,
+            maka saat tanggal berganti besok limit akan otomatis reset kembali menjadi 40 request.
+          </div>
+        </div>
+
+        <div class="limit-box">
+          <h4>Simulasi Request</h4>
+          <div class="field">
+            <label>Pilih Endpoint Demo</label>
+            <div class="input-wrap">
+              <i class="fas fa-link left"></i>
+              <select id="endpointSelect">
+                <option value="/api/ai/search?q=naruto">/api/ai/search?q=naruto</option>
+                <option value="/api/downloader/tiktok">/api/downloader/tiktok</option>
+                <option value="/api/manga/latest">/api/manga/latest</option>
+                <option value="/api/news/trending">/api/news/trending</option>
+                <option value="/api/image/canvas">/api/image/canvas</option>
+              </select>
+            </div>
+            <small>Setiap klik akan mengurangi limit hari ini dan masuk ke statistik request.</small>
+          </div>
+          <div class="request-actions">
+            <button class="action-btn-outline" onclick="simulateRequest(1)"><i class="fas fa-bolt"></i> 1 Request</button>
+            <button class="action-btn-outline" onclick="simulateRequest(5)"><i class="fas fa-bolt"></i> 5 Request</button>
+            <button class="action-btn-outline" onclick="simulateRequest(10)"><i class="fas fa-bolt"></i> 10 Request</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- TAB: LOGS -->
+  <div class="tab-content" id="tab-logs">
+    <section class="surface section-card">
+      <div class="section-head"><i class="fas fa-clock-rotate-left"></i> REQUEST LOG</div>
+      <div class="log-list" id="logList"></div>
+    </section>
+  </div>
+
+  <!-- TAB: API -->
+  <div class="tab-content" id="tab-api">
+    <section class="surface section-card">
+      <div class="section-head"><i class="fas fa-key"></i> API KEY</div>
+
+      <div class="api-key-wrap">
+        <div class="api-key-field" id="apiKeyField">••••••••••••••••••••••••••</div>
+        <button class="icon-btn" onclick="toggleApiKeyVisibility()" aria-label="Show/hide key"><i class="fas fa-eye" id="apiEyeIcon"></i></button>
+        <button class="icon-btn" onclick="copyApiKey()" aria-label="Copy key"><i class="fas fa-copy"></i></button>
+        <button class="icon-btn" onclick="regenerateApiKey()" aria-label="Regenerate key"><i class="fas fa-rotate"></i></button>
+      </div>
+
+      <div class="api-note">Klik icon mata untuk show/hide API key lengkap. Regenerate hanya simulasi lokal dan tidak mengurangi limit.</div>
+
+      <div class="api-grid">
+        <div class="api-box">
+          <h4>Status Paket</h4>
+          <p>
+            Akun ini menggunakan paket <strong>FREE</strong> tanpa saldo.
+            Limit aktif adalah <strong>40 request / day</strong> dan akan reset otomatis setiap hari.
+          </p>
+        </div>
+        <div class="api-box">
+          <h4>Petunjuk Penggunaan</h4>
+          <p>
+            Gunakan header <strong>x-api-key</strong> pada setiap request.
+            Dokumentasi endpoint akan tersedia di halaman <a href="/docs" style="color:var(--primary);text-decoration:none;font-weight:600;">/docs</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© <span id="yr"></span> Coders API</span>
+    <div class="footer-links">
+      <a href="/docs">Docs</a>
+      <a href="/privacy-policy">Privacy</a>
+      <a href="/terms-of-service">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<div id="toast-container"></div>
+
+<div class="modal-overlay" id="logoutModal">
+  <div class="modal-box">
+    <div class="modal-head"><i class="fas fa-right-from-bracket"></i> KONFIRMASI LOGOUT</div>
+    <div class="modal-text">Apakah anda ingin logout dari akun ini? Tindakan ini hanya simulasi demo dan belum terhubung ke endpoint logout.</div>
+    <div class="modal-actions">
+      <button class="action-btn-outline" onclick="closeLogoutModal()">Batal</button>
+      <button class="action-btn" onclick="confirmLogout()"><i class="fas fa-sign-out-alt" style="font-size:11px"></i> Ya, Logout</button>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="/app.js"></script>
+</body>
+</html>
