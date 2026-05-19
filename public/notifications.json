@@ -1,0 +1,16 @@
+[
+    {
+    "id": "#01",
+    "date": "2025-12-17",
+    "title": "Iklan API", 
+    "message": "Halo welcome to my rest api website my name is satria!",
+    "read": false
+    },
+  {
+    "id": "#02",
+    "date": "2025-12-17",
+    "title": "Sistem Rest API", 
+    "message": "Perubahan Design dan perbaikan bug",
+    "read": true
+  }
+]
