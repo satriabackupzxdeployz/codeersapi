@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Satria-API</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{height:100vh;display:flex;align-items:center;justify-content:center;background:#fff;font-family:'Space Grotesk',sans-serif;position:relative;overflow:hidden}
+        body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;background-image:linear-gradient(rgba(0,0,0,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.03) 1px,transparent 1px);background-size:40px 40px}
+        .container{position:relative;z-index:1;text-align:center}
+        .code{font-size:5rem;font-weight:700;color:#1f2937;line-height:1;margin-bottom:8px}
+        .divider{width:1px;height:36px;background:#e5e7eb;margin:0 auto 12px}
+        .msg{font-size:15px;color:#6b7280;margin-bottom:24px}
+        .btn{display:inline-block;background:#1f2937;color:#fff;text-decoration:none;padding:10px 24px;border-radius:10px;font-size:13px;font-weight:600;transition:background .2s}
+        .btn:hover{background:#374151}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="code">404</div>
+        <div class="divider"></div>
+        <p class="msg">Page Not Found</p>
+        <a href="/" class="btn">← Kembali ke Beranda</a>
+    </div>
+</body>
+</html>
