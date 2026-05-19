@@ -1,0 +1,1 @@
+Satria rest api copyright by satriadevs
